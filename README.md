@@ -4,3 +4,4 @@
 * Tabs are 4 spaces, make sure they are registered as spaces and not as tabs
 * Every Fucntion and Class needs a consised Docstring
 * All quotationmarks are double quotationmarks (" not '')
+* A comma is followed bij a space for readability
