@@ -1,7 +1,5 @@
 import numpy as np
-
 import weightsInit
-
 import feedForward
 
 class ArtificialNeuralNetwork:
@@ -15,9 +13,23 @@ class ArtificialNeuralNetwork:
         self.biases = weightsInit.createBiases(dimensions)
         self.activationFunction = activationFunction
 
-    def generateOuput(self, inputLayer):
-
+    def generateOutput(self, inputLayer):
+        """
+        Method that returns an np.array of length 3, each corresponding to a move to make
+        """
         return feedForward.feedForward(inputLayer, self.weights, self.biases, self.activationFunction)
 
+    def generateMove(self, inputLayer):
+        """
+        Method that returns a move, either 'fold', 'call', 'raise'
+        """
+
+        moveDictionary = {0:"Fold", 1:"Call", 2:"Raise"}
+        #create a move dictionary
+        output = self.generateOutput(inputLayer)
+        move = np.argmax(output)
+        #take the index of the maximum value of the output
+        return moveDictionary[move]
+
 network = ArtificialNeuralNetwork([7,11,11,3],"sigmoid")
-print(network.generateOuput([0,1,0,1,0,1,0]))
+print(network.generateMove([1,0,1,0,1,0,1]))
