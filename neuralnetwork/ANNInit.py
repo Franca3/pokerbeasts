@@ -27,5 +27,3 @@ def createBiases(layers):
         biases[i] = np.random.uniform(-1, 1., dimension)
 
     return biases
-
-print("Test succesfull")
