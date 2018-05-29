@@ -1,6 +1,6 @@
 from pypokerengine.players import BasePokerPlayer
 
-class Player(BasePokerPlayer):
+class HumanPlayer(BasePokerPlayer):
     """
     A command line based interface to play along
     """
