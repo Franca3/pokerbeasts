@@ -5,10 +5,11 @@ class HumanPlayer(BasePokerPlayer):
     A command line based interface to play along
     """
     def __init__(self):
-        name = input("Enter your name :")
+        self.name = input("Enter your name: ")
 
     def declare_action(self, valid_actions, hole_card, round_state):
         optionDict = { "F":0 , "C":1 , "R":2 } 
+        print( self.name, ", it's your turn!")
         print("Your cards are: ", hole_card)
         chosen = input("(R)aise, (F)old, (C)all: " )
 
