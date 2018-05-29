@@ -21,9 +21,11 @@ def createBiases(layers):
     biases = [0]*(len(layers)-1)
     #create an empty list to fill with weights
 
-    for i in range(len(weights)):
+    for i in range(len(biases)):
         #loop over the list of weights and set it to a np.array with the correct dimensions, uniformly distributed between -1 and 1
         dimension = (layers[i+1])
         biases[i] = np.random.uniform(-1, 1., dimension)
 
     return biases
+
+print("Test succesfull")
