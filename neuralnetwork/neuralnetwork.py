@@ -1,14 +1,11 @@
 import numpy as np
 
-class Dimensions:
-    """ Structure for properties of neural network"""
-    def __init__(self, inputNodes, layerAmounts, layerNodes, outputNodes):
-        self.inputNodes = inputNodes
-        self.layerAmounts = layerAmounts
-        self.layerNodes = layerNodes
-        self.outputNodes = outputNodes
+import weightsInit
 
 class ArtificialNeuralNetwork:
     """ Neural network object"""
-    def __init__(self, Dimensions, activationFunction):
-        pass
+    def __init__(self, dimensions, activationFunction):
+        self.weights = weightsInit.createWeights(dimensions)
+        self.biases = weightsInit.createBiases(dimensions)
+
+network = ArtificialNeuralNetwork([7,11,11,3],None)
