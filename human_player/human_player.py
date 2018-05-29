@@ -8,16 +8,19 @@ class HumanPlayer(BasePokerPlayer):
         name = input("Enter your name :")
 
     def declare_action(self, valid_actions, hole_card, round_state):
-        optionDict = { "R":0 , "C":1 , "F":2 } 
+        optionDict = { "F":0 , "C":1 , "R":2 } 
+        print("Your cards are: ", hole_card)
         chosen = input("(R)aise, (F)old, (C)all: " )
 
         try:
-            call_action_info = valid_actions[chosen]
+            action_info = valid_actions[ optionDict[chosen] ]
         except KeyError:
             # Assume to call if the input is incorrect
-            call_action_info = valic_actions[1]
+            action_info = valid_actions[1]
         
-        action, amount = call_action_info["action"], call_action_info["amount"]
+        action, amount = action_info["action"], action_info["amount"]
+        if(chosen == "R"):
+            amount = amount["min"]
         return action, amount
          
         
