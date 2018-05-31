@@ -5,10 +5,7 @@ def sigmoid(x):
     return 1/(1+np.exp(-x))
 
 def linRect(x):
-    if x<=0:
-        return 0
-    else:
-        return x
+    return (max(0,x) )
 
 def feedForward(inputLayer, weights, biases, activationFunction):
     """
@@ -18,10 +15,14 @@ def feedForward(inputLayer, weights, biases, activationFunction):
         #loop over the weights, where each next layer is the dot product of the previous layer and the weight matrix
         inputLayer = np.dot(inputLayer,weights[i])
         inputLayer = inputLayer + biases[i]
-        
+
+        inputlayer = activationFunction(inputLayer)
+        """
+        This makes more sense as just a straight reference to a function
         if activationFunction == "sigmoid":
             inputLayer = sigmoid(inputLayer)
         if activationFunction == "linRect":
             inputLayer = linRect(inputLayer)
+        """
     
     return inputLayer

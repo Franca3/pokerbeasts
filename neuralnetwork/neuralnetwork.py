@@ -6,8 +6,9 @@ class ArtificialNeuralNetwork:
     """ Neural network object"""
     def __init__(self, dimensions, activationFunction):
         """
-        dimensions is a list of numbers (eg. [7,3,3,2])
-        activationfunctio is a string, either 'sigmoid' or 'linRect'
+        dimensions is a list of numbers, giving the amount of nodes of each row (eg. [7,3,3,2])
+        Activation function is function  given to each node
+        
         """
         self.weights = ANNInit.createWeights(dimensions)
         self.biases = ANNInit.createBiases(dimensions)
