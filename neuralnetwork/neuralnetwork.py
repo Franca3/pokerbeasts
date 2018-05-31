@@ -8,8 +8,8 @@ class ArtificialNeuralNetwork:
         """
         dimensions is a list of numbers, giving the amount of nodes of each row (eg. [7,3,3,2])
         Activation function is function  given to each node
-        
         """
+
         self.weights = ANNInit.createWeights(dimensions)
         self.biases = ANNInit.createBiases(dimensions)
         self.activationFunction = activationFunction
