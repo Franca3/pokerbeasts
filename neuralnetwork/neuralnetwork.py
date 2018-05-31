@@ -1,6 +1,6 @@
 import numpy as np
-import ANNInit
-import feedForward
+from neuralnetwork import ANNInit
+from neuralnetwork import feedForward
 
 class ArtificialNeuralNetwork:
     """ Neural network object"""
@@ -24,10 +24,9 @@ class ArtificialNeuralNetwork:
         """
         Method that returns a move, either 'fold', 'call', 'raise'
         """
-
-        moveDictionary = {0:"fold", 1:"call", 2:"raise"}
         #create a move dictionary
         output = self.generateOutput(inputLayer)
         move = np.argmax(output)
         #take the index of the maximum value of the output
-        return moveDictionary[move]
+        #if the index is 0, fold, if the index is 1, call, if the index is 2, raise
+        return move
