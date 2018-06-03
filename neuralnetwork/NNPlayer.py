@@ -9,8 +9,11 @@ class NNPlayer(BasePokerPlayer):
         #create a neural network for the player
 
     def declare_action(self, valid_actions, hole_card, round_state):
-        move = self.neuralnetwork.generateMove([1,0,1,0,1,0,1])
-        #use the generateMove function to generate a move (0,1,2)
+        NNinput = [hole_card, round_state["community_card"], round_state['street'], round_state["pot"["main"]]]
+        #pseudocode for the input of the neural network
+
+        move = self.neuralnetwork.generateMove(NNinput)
+        #use the generateMove function to generate a move, returns (0,1,2)
 
         action_info = valid_actions[move]
         #get the action info for pypokerengine corresponding to the move
