@@ -9,7 +9,10 @@ class NNPlayer(BasePokerPlayer):
         #create a neural network for the player
 
     def declare_action(self, valid_actions, hole_card, round_state):
-        NNinput = [hole_card, round_state["community_card"], round_state['street'], round_state["pot"["main"]]]
+        street = round_state["street"]
+        pot = round_state["pot"["main"]]
+        community_card = round_state["community_card"]
+        NNinput = [hole_card, community_card, int(street == "flop"), int(street == "turn"), int(street == "river"), pot]
         #pseudocode for the input of the neural network
 
         move = self.neuralnetwork.generateMove(NNinput)
