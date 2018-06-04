@@ -1,6 +1,5 @@
 from pypokerengine.players import BasePokerPlayer
 from neuralnetwork import neuralnetwork
-from neuralnetwork import feedForward
 
 class NNPlayer(BasePokerPlayer):
 
@@ -8,12 +7,24 @@ class NNPlayer(BasePokerPlayer):
         self.neuralnetwork = neuralnetwork.ArtificialNeuralNetwork(dimensions, activationFunction)
         #create a neural network for the player
 
-    def declare_action(self, valid_actions, hole_card, round_state):
+    def generateInput(self, valid_actions, hole_card, round_state):
         street = round_state["street"]
-        pot = round_state["pot"["main"]]
+        #get the current street from the round state
+        pot = valid_actions[1]["amount"] / round_state["pot"]["main"]["amount"]
+        #amount to raise (action 1) over the amount in the pot
         community_card = round_state["community_card"]
-        NNinput = [hole_card, community_card, int(street == "flop"), int(street == "turn"), int(street == "river"), pot]
-        #pseudocode for the input of the neural network
+
+        last_action = round_state["action_histories"][list(round_state["action_histories"].keys())[-1]][-1]["action"] if round_state["action_histories"][list(round_state["action_histories"].keys())[-1]] != [] else "FIRST TO PLAY"
+        #long line to retrive the action of the last player, last action is burried in tons of dictionaries
+
+        #NNinput = [hole_card, community_card, int(street == "flop"), int(street == "turn"), int(street == "river"), int(last_action == "RAISE", pot]
+        NNinput = [1, 1, int(street == "flop"), int(street == "turn"), int(street == "river"), int(last_action == "RAISE"), pot]
+        #eventually use the line above, but for now set the hole_card and community_card to 1
+        return NNinput
+
+    def declare_action(self, valid_actions, hole_card, round_state):
+        NNinput = self.generateInput(valid_actions, hole_card, round_state)
+        #use the generateInput function to generate input
 
         move = self.neuralnetwork.generateMove(NNinput)
         #use the generateMove function to generate a move, returns (0,1,2)
