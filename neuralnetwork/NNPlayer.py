@@ -1,5 +1,7 @@
 from pypokerengine.players import BasePokerPlayer
 from neuralnetwork import neuralnetwork
+from deuces.card import Card
+from deuces.evaluator import Evaluator
 
 class NNPlayer(BasePokerPlayer):
 
@@ -10,10 +12,21 @@ class NNPlayer(BasePokerPlayer):
     def calculateHand(self, hole_card, round_state):
         """ 
         Passes what's on table and in your hand to deuces,
-        to calculate hand strength
+        to calculate hand strength,
+        if the flop hasnt been played yet, return -1
         """
+        if( round_state["community_card"] == []):
+            return -1
+            
+        board = list( map(lambda x: Card.new(x[-1] + x[0].lower() ), round_state["community_card"] ) )
+
+        hand = list( map(lambda x: Card.new(x[-1] + x[0].lower() ), hole_card) )
+        evaluator = Evaluator()
+        return evaluator.evaluate(board, hand)
 
     def generateInput(self, valid_actions, hole_card, round_state):
+        print( self.calculateHand( hole_card, round_state) )
+
         street = round_state["street"]
         #get the current street from the round state
         pot = valid_actions[1]["amount"] / round_state["pot"]["main"]["amount"]
