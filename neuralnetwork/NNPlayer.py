@@ -7,6 +7,12 @@ class NNPlayer(BasePokerPlayer):
         self.neuralnetwork = neuralnetwork.ArtificialNeuralNetwork(dimensions, activationFunction)
         #create a neural network for the player
 
+    def calculateHand(self, hole_card, round_state):
+        """ 
+        Passes what's on table and in your hand to deuces,
+        to calculate hand strength
+        """
+
     def generateInput(self, valid_actions, hole_card, round_state):
         street = round_state["street"]
         #get the current street from the round state
@@ -14,11 +20,14 @@ class NNPlayer(BasePokerPlayer):
         #amount to raise (action 1) over the amount in the pot
         community_card = round_state["community_card"]
 
-        last_action = round_state["action_histories"][list(round_state["action_histories"].keys())[-1]][-1]["action"] if round_state["action_histories"][list(round_state["action_histories"].keys())[-1]] != [] else "FIRST TO PLAY"
-        #long line to retrive the action of the last player, last action is burried in tons of dictionaries
+        if round_state["action_histories"][list(round_state["action_histories"].keys())[-1]] != []: 
+            last_action = round_state["action_histories"][list(round_state["action_histories"].keys())[-1]][-1]["action"] 
+        else:
+            last_action = "FIRST TO PLAY"
+
 
         #NNinput = [hole_card, community_card, int(street == "flop"), int(street == "turn"), int(street == "river"), int(last_action == "RAISE", pot]
-        NNinput = [1, 1, int(street == "flop"), int(street == "turn"), int(street == "river"), int(last_action == "RAISE"), pot]
+        NNinput = [1, 1, street == "flop", street == "turn", street == "river", last_action == "RAISE", pot]
         #eventually use the line above, but for now set the hole_card and community_card to 1
         return NNinput
 
