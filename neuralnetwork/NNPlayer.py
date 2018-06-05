@@ -9,6 +9,7 @@ class NNPlayer(BasePokerPlayer):
         self.neuralnetwork = neuralnetwork.ArtificialNeuralNetwork(dimensions, activationFunction)
         #create a neural network for the player
 
+    # We converted deuces package to python 3 by hand, should work now
     def calculateHand(self, hole_card, round_state):
         """ 
         Passes what's on table and in your hand to deuces,
