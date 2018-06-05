@@ -23,7 +23,15 @@ class NNPlayer(BasePokerPlayer):
 
         hand = list( map(lambda x: Card.new(x[-1] + x[0].lower() ), hole_card) )
         evaluator = Evaluator()
-        return evaluator.evaluate(board, hand)
+        #Return as a fraction, lower is better
+        return ( evaluator.evaluate(board, hand) / 7462 )
+
+
+    def preflopStrategy(self, hole_card, round_state):
+        """
+        Preflop strategy is based on a fixed table, without a lot of variation
+        """
+        pass
 
     def generateInput(self, valid_actions, hole_card, round_state):
         print( self.calculateHand( hole_card, round_state) )
